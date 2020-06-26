@@ -21,7 +21,7 @@
     const form = document.getElementById("text");
     form.addEventListener("submit", (submitEvent) => {
       submitEvent.preventDefault();
-      console.log(submitEvent)
+      console.log(submitEvent.target[0].value)
     });  
   }
 
