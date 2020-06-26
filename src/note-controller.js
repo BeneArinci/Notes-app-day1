@@ -9,8 +9,8 @@
   }
 
   NoteController.prototype.insertHTML = function (view = this.noteListView.returnHTML()) {
+    console.log("let's test")
     this.listeningToHashChange()
-    var view = view
     var element = document.getElementById("app");
     element.innerHTML = view;
     
@@ -19,19 +19,23 @@
   NoteController.prototype.listeningToHashChange = function () {
     window.addEventListener("hashchange", () =>{
       this.insertHTML(this.returnViewForSingleNote())
+      //console.log(this.returnViewForSingleNote())
       });
+    
   }
 
   NoteController.prototype.returnViewForSingleNote = function () {
-    return SingleNoteView(noteToView).returnHtmlString()
+    singleview = new SingleNoteView(this.singleNotefromURL())
+    //console.log(singleview)
+    return singleview.returnHtmlString()
   }
   
   NoteController.prototype.singleNotefromURL = function() {
-    var noteToView = this.noteList.getNotes().filter(element => {
+    var noteToView = this.noteList.showList().filter(element => {
       return element.returnId().toString() === this.getIdFromURL(window.location);
     })[0];
-    console.log(this.getIdFromURL(window.location))
-    console.log(noteToView)
+    //console.log(this.getIdFromURL(window.location))
+    //console.log(noteToView)
     return noteToView;
   }
 
