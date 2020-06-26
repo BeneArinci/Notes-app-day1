@@ -4,24 +4,32 @@
   function NoteController(noteList = new NoteList()) {
     this.noteList = noteList;
     this.noteList.addNote("Favourite drink: seltzer");
-    console.log(this.noteList)
+    //console.log(this.noteList)
     this.noteListView = new NoteListView(this.noteList);
   }
 
   NoteController.prototype.insertHTML = function (view = this.noteListView.returnHTML()) {
-    console.log("let's test")
+    //console.log("let's test")
     this.listeningToHashChange()
+    this.listeningToSubmit()
     var element = document.getElementById("app");
     element.innerHTML = view;
     
   };
 
+  NoteController.prototype.listeningToSubmit = function () {
+    const form = document.getElementById("text");
+    form.addEventListener("submit", (submitEvent) => {
+      submitEvent.preventDefault();
+      console.log(submitEvent)
+    });  
+  }
+
   NoteController.prototype.listeningToHashChange = function () {
     window.addEventListener("hashchange", () =>{
       this.insertHTML(this.returnViewForSingleNote())
       //console.log(this.returnViewForSingleNote())
-      });
-    
+      });  
   }
 
   NoteController.prototype.returnViewForSingleNote = function () {
