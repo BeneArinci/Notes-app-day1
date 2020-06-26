@@ -6,11 +6,13 @@
   }
 
   NoteListView.prototype.returnHTML = function() {
-    var notetext = []
-    this.viewnotelist.showList().forEach(function(note){
-      notetext.push(note.receivesText().substr(0,20));
+    var stringhtml = '<ul>'
+    console.log(this.viewnotelist.showList())
+    this.viewnotelist.showList().forEach (note => {
+      stringhtml += `<a href= #${note.returnId()}> <li><div> ${note.receivesText().substr(0,20)}</div></li> </a> </ul>`
     });
-    return "<ul><li><div>"+notetext.join("</div></li><li><div>")+"</div></li></ul>";
+    console.log(stringhtml)
+    return stringhtml;
   }
 
 exports.NoteListView = NoteListView;
