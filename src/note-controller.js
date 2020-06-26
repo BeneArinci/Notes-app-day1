@@ -9,9 +9,10 @@
   }
 
   NoteController.prototype.insertHTML = function (view = this.noteListView.returnHTML()) {
-    //console.log("let's test")
+    console.log("let's test")
     this.listeningToHashChange()
     this.listeningToSubmit()
+    
     var element = document.getElementById("app");
     element.innerHTML = view;
     
@@ -21,9 +22,18 @@
     const form = document.getElementById("text");
     form.addEventListener("submit", (submitEvent) => {
       submitEvent.preventDefault();
-      console.log(submitEvent.target[0].value)
+      this.noteList.addNote(submitEvent.target[0].value)
+      this.insertHTML()
+      // var notetext = submitEvent.target[0].value
+      // return notetext
     });  
+    
   }
+ 
+  // NoteController.prototype.returnSubmittedNote = function() {
+  //   var notetext = this.listeningToSubmit()
+  //   return notetext
+  // }
 
   NoteController.prototype.listeningToHashChange = function () {
     window.addEventListener("hashchange", () =>{
